@@ -11,18 +11,25 @@ using namespace std;
 void assCalc();
 void letterGrade();
 void sign();
+
+int studentId, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, minAss, assTotal, midterm, Final, labexercises, totalPoints, pct;
+int studentcount = 0;
+float grand_totalPoints = 0, grand_totalPct = 0;
+char grade, plusminus;
+int numA = 0, numB = 0, numC = 0, numD = 0, numF = 0;
+const string DataFile = "student_data.txt";
+const string ReportFile = "report.txt";
+const string SummaryFile = "summary.sum";
+const int MaxPoints = 400;
+float avg_totalPoints, avg_pctTotal;
+    
+int ass_Total ();// assingment sum total Function Prototype
+int total_Points();//total points sum Function Prototype
+int Percent();// Percent Function prototype
+void print_grade_Analysis(); //Print grade analysis
 int main()
 {
-    int studentId, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, minAss, assTotal, midterm, Final, labexercises, totalPoints, pct;
-    int studentcount = 0;
-    float grand_totalPoints = 0, grand_totalPct = 0;
-    char grade, plusminus;
-    int numA = 0, numB = 0, numC = 0, numD = 0, numF = 0;
-    const string DataFile = "student_data.txt";
-    const string ReportFile = "report.txt";
-    const string SummaryFile = "summary.sum";
-    const int MaxPoints = 400;
-    float avg_totalPoints, avg_pctTotal;
+    
 
     ifstream fin(DataFile.c_str());
     if (!fin)
@@ -71,16 +78,18 @@ int main()
         if (a10 < minAss)
             minAss = a10;
 
-        // Assignment total
-        assTotal = a1 + a2 + a3+ a4 + a5 + a6 + a7 + a8 + a9 + a10 + a11 - minAss;
+        // Assignment total Function
+        ass_Total();
 
-        // Total Points
-        totalPoints = assTotal + midterm + Final + labexercises;
+        // Total Points Function
+        total_Points();
+        
 
-        // Calculate percent
-        pct = static_cast<int>(100.*totalPoints/MaxPoints+.5);
+        // Calculate percent Function
+        Percent();
+        
 
-        // Determine letter grade
+        // Determine letter grade 
         switch (pct/10)
         {
         case 10:       // "fall through"
@@ -148,12 +157,8 @@ int main()
         
 
     }
-    cout << "The number of A's = " << numA << endl;
-    cout << "The number of B's = " << numB << endl;
-    cout << "The number of C's = " << numC << endl;
-    cout << "The number of D's = " << numD << endl;
-    cout << "The number of F's = " << numF << endl;
-    
+    //print Grade analysis Function
+    print_grade_Analysis();
     
     //Summary Info Check
     cout << "Number of students = " << studentcount << endl;
@@ -162,3 +167,28 @@ int main()
     
 
 }
+
+int ass_Total (){ //assignment sum total funtion
+	assTotal = a1 + a2 + a3+ a4 + a5 + a6 + a7 + a8 + a9 + a10 + a11 - minAss;
+	return(assTotal);
+}
+
+int total_Points(){//Total points sum function
+	totalPoints = assTotal + midterm + Final + labexercises;
+	return(totalPoints);
+} 
+int Percent(){//Total points sum function
+	pct = static_cast<int>(100.*totalPoints/MaxPoints+.5);
+	return(pct);
+} 
+
+void print_grade_Analysis(){//Total points sum function
+	cout << "The number of A's = " << numA << endl;
+    cout << "The number of B's = " << numB << endl;
+    cout << "The number of C's = " << numC << endl;
+    cout << "The number of D's = " << numD << endl;
+    cout << "The number of F's = " << numF << endl;
+	
+} 
+
+
