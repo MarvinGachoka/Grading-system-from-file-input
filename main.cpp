@@ -12,7 +12,7 @@ void assCalc();
 void letterGrade();
 void sign();
 
-int studentId, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, minAss, assTotal, midterm, Final, labexercises, totalPoints, pct;
+int studentId, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, minAss, assTotal, midterm, Final, labexercises, totalPoints, pct, maxi, mini;
 int studentcount = 0;
 float grand_totalPoints = 0, grand_totalPct = 0;
 char grade, plusminus;
@@ -26,7 +26,9 @@ float avg_totalPoints, avg_pctTotal;
 int ass_Total ();// assingment sum total Function Prototype
 int total_Points();//total points sum Function Prototype
 int Percent();// Percent Function prototype
-void print_grade_Analysis(); //Print grade analysis
+void print_grade_Analysis(); //Print grade analysis protype
+void print_Sumary_analysis_to_file(); //Print the summarry analysis to file Function prototype
+
 int main()
 {
     
@@ -87,6 +89,8 @@ int main()
 
         // Calculate percent Function
         Percent();
+        
+        
         
 
         // Determine letter grade 
@@ -157,10 +161,13 @@ int main()
         
 
     }
+    
     //print Grade analysis Function
     print_grade_Analysis();
     
-    //Summary Info Check
+    ////Print the summarry analysis to file Function
+   print_Sumary_analysis_to_file();
+    
     cout << "Number of students = " << studentcount << endl;
     cout << "The average total points = " << setprecision(1) << fixed << avg_totalPoints << endl;
     cout << "The average percent total = " << setprecision(1) << fixed << avg_pctTotal << "%" << endl;
@@ -191,4 +198,13 @@ void print_grade_Analysis(){//Total points sum function
 	
 } 
 
+void print_Sumary_analysis_to_file(){//Print the summarry analysis to file Function
+	 ofstream summary_info_file;
+     summary_info_file.open("summary.txt");
+     summary_info_file << "Number of students = " << studentcount << endl;
+     summary_info_file << "The average total points = " << setprecision(1) << fixed << avg_totalPoints << endl;
+     summary_info_file << "The average percent total = " << setprecision(1) << fixed << avg_pctTotal << "%" << endl;
+     summary_info_file.close();
+	
+} 
 
